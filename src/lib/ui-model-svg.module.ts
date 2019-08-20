@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { AutoSizeDirective } from './directives/auto-size.directive';
+import { AutoViewBoxDirective } from './directives/auto-view-box.directive';
 import { SvgADirective } from './directives/shim/a.directive';
 import { SvgAltGlyphDefDirective } from './directives/shim/alt-glyph-def.directive';
 import { SvgAltGlyphItemDirective } from './directives/shim/alt-glyph-item.directive';
@@ -178,6 +180,8 @@ import { SvgVkernDirective } from './directives/shim/vkern.directive';
     SvgUseDirective,
     SvgViewDirective,
     SvgVkernDirective,
+    AutoViewBoxDirective,
+    AutoSizeDirective,
   ],
   exports: [
     SvgADirective,
@@ -266,6 +270,8 @@ import { SvgVkernDirective } from './directives/shim/vkern.directive';
     SvgUseDirective,
     SvgViewDirective,
     SvgVkernDirective,
+    AutoViewBoxDirective,
+    AutoSizeDirective,
   ],
 })
 export class UiModelSvgModule {
