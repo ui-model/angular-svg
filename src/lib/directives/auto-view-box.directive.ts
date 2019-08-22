@@ -1,19 +1,29 @@
-import { AfterContentChecked, Directive, ElementRef } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
+import { AutoSizeDirective } from './auto-size.directive';
 
 @Directive({
   selector: '[uiAutoViewBox]',
 })
-export class AutoViewBoxDirective implements AfterContentChecked {
+export class AutoViewBoxDirective {
 
-  constructor(private elementRef: ElementRef<SVGGraphicsElement>) {
+  constructor(private autoSize: AutoSizeDirective) {
   }
 
-  get element(): SVGGraphicsElement {
-    return this.elementRef.nativeElement;
+  @Input()
+  left = 0;
+  @Input()
+  top = 0;
+
+  get width(): number {
+    return this.autoSize.width;
   }
 
-  ngAfterContentChecked(): void {
-    const rect = this.element.getBBox();
-    this.element.setAttribute('viewBox', `${rect.x} ${rect.y} ${rect.width} ${rect.height}`);
+  get height(): number {
+    return this.autoSize.height;
+  }
+
+  @HostBinding('attr.viewBox')
+  get viewBox(): string {
+    return `${this.left} ${this.top} ${this.width} ${this.height}`;
   }
 }
