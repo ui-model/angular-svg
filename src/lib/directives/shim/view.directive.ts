@@ -1,13 +1,18 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { getAttr, setAttr } from '../../utils/utils';
 
+type ElementType = SVGViewElement;
+
 @Directive({
   selector: 'view',
 })
 export class SvgViewDirective {
-  constructor(private elementRef: ElementRef<Element>) {
+  constructor(private elementRef: ElementRef<ElementType>) {
   }
 
+  get element(): ElementType {
+    return this.elementRef.nativeElement;
+  }
 
   get externalResourcesRequired(): boolean {
     return getAttr(this.elementRef, 'externalResourcesRequired');
@@ -39,12 +44,12 @@ export class SvgViewDirective {
   }
 
 
-  get viewBox(): string | string[] {
+  get viewBox(): string {
     return getAttr(this.elementRef, 'viewBox');
   }
 
   @Input('viewBox')
-  set viewBox(value: string | string[]) {
+  set viewBox(value: string) {
     setAttr(this.elementRef, 'viewBox', value);
   }
 

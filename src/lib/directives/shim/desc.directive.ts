@@ -1,20 +1,25 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { getAttr, setAttr } from '../../utils/utils';
 
+type ElementType = SVGDescElement;
+
 @Directive({
   selector: 'desc',
 })
 export class SvgDescDirective {
-  constructor(private elementRef: ElementRef<Element>) {
+  constructor(private elementRef: ElementRef<ElementType>) {
   }
 
+  get element(): ElementType {
+    return this.elementRef.nativeElement;
+  }
 
-  get class(): string | string[] {
+  get class(): string {
     return getAttr(this.elementRef, 'class');
   }
 
   @Input('class')
-  set class(value: string | string[]) {
+  set class(value: string) {
     setAttr(this.elementRef, 'class', value);
   }
 

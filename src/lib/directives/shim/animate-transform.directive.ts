@@ -1,13 +1,18 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { getAttr, setAttr } from '../../utils/utils';
 
+type ElementType = SVGAnimateTransformElement;
+
 @Directive({
   selector: 'animateTransform',
 })
 export class SvgAnimateTransformDirective {
-  constructor(private elementRef: ElementRef<Element>) {
+  constructor(private elementRef: ElementRef<ElementType>) {
   }
 
+  get element(): ElementType {
+    return this.elementRef.nativeElement;
+  }
 
   get accumulate(): string {
     return getAttr(this.elementRef, 'accumulate');

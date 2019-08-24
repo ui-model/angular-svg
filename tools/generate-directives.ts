@@ -16,13 +16,18 @@ function generateDirectives() {
     const content = `import { Directive, ElementRef, Input } from '@angular/core';
 import { getAttr, setAttr } from '../../utils/utils';
 
+type ElementType = SVG${toPascalCase(name)}Element;
+
 @Directive({
   selector: '${name}',
 })
 export class Svg${toPascalCase(name)}Directive {
-  constructor(private elementRef: ElementRef<Element>) {
+  constructor(private elementRef: ElementRef<ElementType>) {
   }
 
+  get element(): ElementType {
+    return this.elementRef.nativeElement;
+  }
 ${generateProperties(attrs)}
 
 }

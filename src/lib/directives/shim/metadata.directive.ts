@@ -1,13 +1,18 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { getAttr, setAttr } from '../../utils/utils';
 
+type ElementType = SVGMetadataElement;
+
 @Directive({
   selector: 'metadata',
 })
 export class SvgMetadataDirective {
-  constructor(private elementRef: ElementRef<Element>) {
+  constructor(private elementRef: ElementRef<ElementType>) {
   }
 
+  get element(): ElementType {
+    return this.elementRef.nativeElement;
+  }
 
   get id(): string {
     return getAttr(this.elementRef, 'id');

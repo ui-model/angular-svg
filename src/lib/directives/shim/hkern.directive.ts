@@ -1,13 +1,18 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { getAttr, setAttr } from '../../utils/utils';
 
+type ElementType = SVGElement;
+
 @Directive({
   selector: 'hkern',
 })
 export class SvgHkernDirective {
-  constructor(private elementRef: ElementRef<Element>) {
+  constructor(private elementRef: ElementRef<ElementType>) {
   }
 
+  get element(): ElementType {
+    return this.elementRef.nativeElement;
+  }
 
   get g1(): string {
     return getAttr(this.elementRef, 'g1');

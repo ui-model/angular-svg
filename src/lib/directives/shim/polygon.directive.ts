@@ -1,13 +1,18 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { getAttr, setAttr } from '../../utils/utils';
 
+type ElementType = SVGPolygonElement;
+
 @Directive({
   selector: 'polygon',
 })
 export class SvgPolygonDirective {
-  constructor(private elementRef: ElementRef<Element>) {
+  constructor(private elementRef: ElementRef<ElementType>) {
   }
 
+  get element(): ElementType {
+    return this.elementRef.nativeElement;
+  }
 
   get alignmentBaseline(): string {
     return getAttr(this.elementRef, 'alignment-baseline');
@@ -29,12 +34,12 @@ export class SvgPolygonDirective {
   }
 
 
-  get class(): string | string[] {
+  get class(): string {
     return getAttr(this.elementRef, 'class');
   }
 
   @Input('class')
-  set class(value: string | string[]) {
+  set class(value: string) {
     setAttr(this.elementRef, 'class', value);
   }
 
@@ -439,12 +444,12 @@ export class SvgPolygonDirective {
   }
 
 
-  get points(): string | string[] {
+  get points(): string {
     return getAttr(this.elementRef, 'points');
   }
 
   @Input('points')
-  set points(value: string | string[]) {
+  set points(value: string) {
     setAttr(this.elementRef, 'points', value);
   }
 
@@ -509,12 +514,12 @@ export class SvgPolygonDirective {
   }
 
 
-  get strokeDasharray(): string | number[] {
+  get strokeDasharray(): string {
     return getAttr(this.elementRef, 'stroke-dasharray');
   }
 
   @Input('stroke-dasharray')
-  set strokeDasharray(value: string | number[]) {
+  set strokeDasharray(value: string) {
     setAttr(this.elementRef, 'stroke-dasharray', value);
   }
 
@@ -629,12 +634,12 @@ export class SvgPolygonDirective {
   }
 
 
-  get transform(): string | string[] {
+  get transform(): string {
     return getAttr(this.elementRef, 'transform');
   }
 
   @Input('transform')
-  set transform(value: string | string[]) {
+  set transform(value: string) {
     setAttr(this.elementRef, 'transform', value);
   }
 

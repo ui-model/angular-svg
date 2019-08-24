@@ -1,13 +1,18 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { getAttr, setAttr } from '../../utils/utils';
 
+type ElementType = SVGScriptElement;
+
 @Directive({
   selector: 'script',
 })
 export class SvgScriptDirective {
-  constructor(private elementRef: ElementRef<Element>) {
+  constructor(private elementRef: ElementRef<ElementType>) {
   }
 
+  get element(): ElementType {
+    return this.elementRef.nativeElement;
+  }
 
   get externalResourcesRequired(): boolean {
     return getAttr(this.elementRef, 'externalResourcesRequired');
